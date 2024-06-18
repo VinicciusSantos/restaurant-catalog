@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  catalog-front:
+    container_name: catalog-front
+    image: catalog-front
+    restart: always
+    build:
+      context: .
+    volumes:
+      - ./src:/app/src
+    ports:
+      - 5173:5173
