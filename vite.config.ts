@@ -11,10 +11,13 @@ export default defineConfig({
     strictPort: true,
   },
   server: {
-    port: 5173,
-    strictPort: true,
-    host: true,
-    origin: "http://0.0.0.0:5173",
+    proxy: {
+      "/api": {
+        target: "https://cdn-dev.preoday.com/challenge",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
   },
   resolve: {
     alias: {
