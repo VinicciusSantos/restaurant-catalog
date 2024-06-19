@@ -11,7 +11,7 @@
     "prefix": ""
   },
   "aliases": {
-    "components": "src/presentation",
-    "utils": "src/presentation/utils/shadcn"
+    "components": "@presentation",
+    "utils": "@presentation/utils/shadcn"
   }
 }
