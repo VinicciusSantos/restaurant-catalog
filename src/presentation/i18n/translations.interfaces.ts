@@ -1,9 +1,7 @@
 export interface AppTranslations {
-  translations: {
-    menu: MenuPageTranslations;
-    signIn: SignInPageTranslations;
-    contactUs: ContactUsPageTranslations;
-  };
+  menu: MenuPageTranslations;
+  signIn: SignInPageTranslations;
+  contactUs: ContactUsPageTranslations;
 }
 
 interface PageTransations {

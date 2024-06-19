@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import i18n from "./internationalization";
 
 interface TranslatorProps {
@@ -6,7 +5,5 @@ interface TranslatorProps {
 }
 
 export const Translator = ({ path }: TranslatorProps) => {
-  const { t } = useTranslation();
-  console.log("🚀 ~ Translator ~ t:", i18n.language)
-  return t(path);
+  return i18n.t(path);
 };
