@@ -1,15 +1,15 @@
-import "./index.css";
+import './index.css';
 
-import { setupInternationalizations } from "@presentation/i18n";
-import { router } from "@presentation/router";
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { Provider } from "react-redux";
-import { RouterProvider } from "react-router-dom";
+import { setupInternationalizations } from '@presentation/i18n';
+import { router } from '@presentation/router';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { RouterProvider } from 'react-router-dom';
 
-import { UsecasesFactory } from "./data/factory";
-import { AxiosHttpClient } from "./infra/protocols";
-import { store } from "./presentation/store";
+import { UsecasesFactory } from './data/factory';
+import { AxiosHttpClient } from './infra/protocols';
+import { store } from './presentation/store';
 
 setupInternationalizations();
 

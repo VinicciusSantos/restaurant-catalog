@@ -1,12 +1,37 @@
 import { Header } from "@presentation/components";
-import { FunctionComponent } from "react";
+import { IState } from "@presentation/store";
+import { fetchVenue } from "@presentation/store/venue";
+import { FunctionComponent, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 
 export const App: FunctionComponent = () => {
+  const dispatch = useDispatch();
+  const venue = useSelector((state: IState) => state.venue.venue);
+  const loading = useSelector((state: IState) => state.venue.loading);
+
+  useEffect(() => {
+    dispatch(fetchVenue());
+  }, [dispatch]);
+
+  return <div>{loading ? <Loader /> : venue ? <AppBody /> : <NoData />}</div>;
+};
+
+const AppBody: FunctionComponent = () => {
   return (
-    <>
-      <Header />
-      <Outlet />
-    </>
+    <div className="flex flex-col items-center bg-[#EEEEEE]">
+      <div className="w-full max-w-[1600px] min-h-screen shadow">
+        <Header />
+        <Outlet />
+      </div>
+    </div>
   );
+};
+
+const Loader: FunctionComponent = () => {
+  return <p>Carregando...</p>;
+};
+
+const NoData: FunctionComponent = () => {
+  return <p>Dados do venue não disponíveis.</p>;
 };
