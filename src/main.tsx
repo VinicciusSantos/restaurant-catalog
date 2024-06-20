@@ -10,6 +10,7 @@ import { RouterProvider } from 'react-router-dom';
 import { UsecasesFactory } from './data/factory';
 import { AxiosHttpClient } from './infra/protocols';
 import { store } from './presentation/store';
+import { Toaster } from '@presentation/ui';
 
 setupInternationalizations();
 
@@ -22,6 +23,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>
       <RouterProvider router={router}></RouterProvider>
+      <Toaster />
     </Provider>
   </React.StrictMode>
 );

@@ -4,3 +4,6 @@ export * from "./button";
 export * from "./input";
 export * from "./sheet";
 export * from "./tabs";
+export * from "./textarea";
+export * from "./toast";
+export * from "./toaster";
