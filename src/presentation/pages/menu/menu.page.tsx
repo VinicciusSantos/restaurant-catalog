@@ -82,7 +82,7 @@ const MenuSectionsTabs: FunctionComponent = () => {
                 <AvatarImage src={section.images[0].image} />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
-              <h4>{section.name}</h4>
+              <span>{section.name}</span>
             </div>
           </TabsTrigger>
         ))}
@@ -93,22 +93,37 @@ const MenuSectionsTabs: FunctionComponent = () => {
 
 const MenuSectionAccordion: FunctionComponent = () => {
   const { menu } = useSelector((state: IState) => state.menu);
+  const { venue } = useSelector((state: IState) => state.venue);
   const allSections = menu?.sections.map((section) => section.id.toString());
 
   return (
     <Accordion type="multiple" defaultValue={allSections}>
       {menu?.sections.map((section) => (
-        <AccordionItem className="px-[16px]" key={section.id} value={section.id.toString()}>
-          <AccordionTrigger>{section.name}</AccordionTrigger>
+        <AccordionItem
+          className="px-[16px]"
+          key={section.id}
+          value={section.id.toString()}
+        >
+          <AccordionTrigger className="text-xl">
+            {section.name}
+          </AccordionTrigger>
           <AccordionContent>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-6">
               {section.items.map((item) => (
-                <div key={item.id} className="flex gap-4">
-                  <div className="flex flex-col gap-2">
-                    <h4>{item.name}</h4>
-                    <p>{item.description}</p>
-                    <p>{item.price}</p>
+                <div key={item.id} className="flex gap-4 items-center justify-between">
+                  <div className="flex flex-col gap-1">
+                    <span className="font-bold text-base">{item.name}</span>
+                    {item.description && (
+                      <p className="text-base">{item.description}</p>
+                    )}
+                    <p className="text-base font-bold text-[#464646]">
+                      {venue?.currency}
+                      {item.price.toFixed(2)}
+                    </p>
                   </div>
+                  {item.images && item.images.length && (
+                    <img className="h-[85px] rounded-md" src={item.images[0].image} alt="food image" />
+                  )}
                 </div>
               ))}
             </div>

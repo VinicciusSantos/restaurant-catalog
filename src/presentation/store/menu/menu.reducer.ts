@@ -1,4 +1,9 @@
-import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  Dispatch,
+  PayloadAction,
+  UnknownAction,
+} from "@reduxjs/toolkit";
 import { Menu } from "../../../domain/models";
 import { usecasesFactory } from "../../../main";
 
