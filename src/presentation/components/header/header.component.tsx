@@ -1,6 +1,7 @@
 import "./header.styles.css";
 
 import { Translator } from "@presentation/i18n";
+import { IState } from "@presentation/store";
 import {
   Button,
   Sheet,
@@ -11,6 +12,7 @@ import {
 import { cn } from "@presentation/utils/shadcn";
 import { Menu } from "lucide-react";
 import { FunctionComponent } from "react";
+import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
 const links = [
@@ -20,7 +22,8 @@ const links = [
 ];
 
 export const Header: FunctionComponent = () => {
-  const location = useLocation();
+  const webSettings = useSelector((state: IState) => state.venue.venue?.webSettings);
+  const location = useLocation(); 
 
   const currentPage = links.find(({ to }) => to === location.pathname);
 
@@ -31,7 +34,10 @@ export const Header: FunctionComponent = () => {
     );
 
   return (
-    <header className="header w-full">
+    <header
+      className="header w-full"
+      style={{ backgroundColor: webSettings?.navBackgroundColour }}
+    >
       <nav className="hidden header__nav md:flex">
         {links.map(({ to, label }) => (
           <Link key={to} to={to} className={getNavItemClassName(to)}>
