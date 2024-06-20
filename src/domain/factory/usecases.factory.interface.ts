@@ -4,6 +4,7 @@ export interface IUsecasesFactory {
   basket: IBasketFactory;
   menu: IMenuFactory;
   venue: IVenuesFactory;
+  contact: IContactFactory;
 }
 
 export interface IBasketFactory {
@@ -18,4 +19,8 @@ export interface IMenuFactory {
 
 export interface IVenuesFactory {
   makeGetVenueUsecase(): IUsecase;
+}
+
+export interface IContactFactory {
+  makeSendMessageUsecase(): IUsecase;
 }

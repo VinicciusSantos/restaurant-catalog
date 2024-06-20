@@ -1,6 +1,7 @@
 import { HttpClient } from "../../domain/protocols/http";
 import {
   IBasketFactory,
+  IContactFactory,
   IMenuFactory,
   IUsecasesFactory,
   IVenuesFactory,
@@ -12,6 +13,7 @@ import {
 } from "../usecases/basket";
 import { GetMenuUsecase } from "../usecases/menu";
 import { GetVenueUsecase } from "../usecases/venue";
+import { SendMessageUsecase } from "../usecases/contact";
 
 export class UsecasesFactory implements IUsecasesFactory {
   constructor(
@@ -38,6 +40,12 @@ export class UsecasesFactory implements IUsecasesFactory {
     return {
       makeGetVenueUsecase: () =>
         new GetVenueUsecase(this.baseUrl, this.httpClient),
+    };
+  }
+
+  public get contact(): IContactFactory {
+    return {
+      makeSendMessageUsecase: () => new SendMessageUsecase(),
     };
   }
 }

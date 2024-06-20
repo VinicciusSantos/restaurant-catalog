@@ -1,6 +1,6 @@
 import "./menu.styles.css";
 
-import { Banner } from "@presentation/components";
+import { Banner, Basket } from "@presentation/components";
 import { IState } from "@presentation/store";
 import { fetchMenu } from "@presentation/store/menu";
 import {
@@ -43,11 +43,12 @@ const MenuBody: FunctionComponent = () => {
     <>
       <Input className="my-3" type="text" placeholder="Search" />
 
-      <div className="menu-content bg-[#F8F9FA] flex flex-col gap-8 px-[40px] py-[32px]">
+      <div className="menu-content bg-[#F8F9FA] flex gap-8 px-[40px] py-[32px]">
         <div className="w-[600px] bg-white shadow">
           <MenuSectionsTabs />
           <MenuSectionAccordion />
         </div>
+        <Basket />
       </div>
     </>
   );
@@ -110,7 +111,10 @@ const MenuSectionAccordion: FunctionComponent = () => {
           <AccordionContent>
             <div className="flex flex-col gap-6">
               {section.items.map((item) => (
-                <div key={item.id} className="flex gap-4 items-center justify-between">
+                <div
+                  key={item.id}
+                  className="flex gap-4 items-center justify-between"
+                >
                   <div className="flex flex-col gap-1">
                     <span className="font-bold text-base">{item.name}</span>
                     {item.description && (
@@ -122,7 +126,11 @@ const MenuSectionAccordion: FunctionComponent = () => {
                     </p>
                   </div>
                   {item.images && item.images.length && (
-                    <img className="h-[85px] rounded-md" src={item.images[0].image} alt="food image" />
+                    <img
+                      className="h-[85px] rounded-md"
+                      src={item.images[0].image}
+                      alt="food image"
+                    />
                   )}
                 </div>
               ))}
