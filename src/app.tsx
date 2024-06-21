@@ -4,6 +4,7 @@ import { fetchVenue } from "@presentation/store/venue";
 import { FunctionComponent, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
+import { UnknownAction } from "redux";
 
 export const App: FunctionComponent = () => {
   const dispatch = useDispatch();
@@ -11,7 +12,7 @@ export const App: FunctionComponent = () => {
   const loading = useSelector((state: IState) => state.venue.loading);
 
   useEffect(() => {
-    dispatch(fetchVenue());
+    dispatch(fetchVenue() as unknown as UnknownAction);
   }, [dispatch]);
 
   return <div>{loading ? <Loader /> : venue ? <AppBody /> : <NoData />}</div>;

@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Item, Section } from "../../../domain/models";
 import { ItemStratification } from "./modals/item-stratification.modal";
+import { UnknownAction } from "redux";
 
 export const MenuPage: FunctionComponent = () => {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ export const MenuPage: FunctionComponent = () => {
   const loading = useSelector((state: IState) => state.menu.loading);
 
   useEffect(() => {
-    dispatch(fetchMenu());
+    dispatch(fetchMenu() as unknown as UnknownAction);
   }, [dispatch]);
 
   return (
