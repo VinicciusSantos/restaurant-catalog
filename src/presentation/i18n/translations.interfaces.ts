@@ -9,7 +9,12 @@ interface PageTransations {
   title: string;
 }
 
-export interface MenuPageTranslations extends PageTransations {}
+export interface MenuPageTranslations extends PageTransations {
+  item_modifiers: {
+    count_prefix: string;
+    count_sufix: string;
+  }
+}
 
 export interface SignInPageTranslations extends PageTransations {}
 
@@ -29,5 +34,6 @@ export interface BasketTranslations {
   empty: string;
   total: string;
   subtotal: string;
-  add_to_order: string;
+  update_order: string;
+  updated: string;
 }

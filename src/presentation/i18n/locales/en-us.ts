@@ -3,6 +3,10 @@ import { AppTranslations } from "../translations.interfaces";
 export const enUsTranslations: AppTranslations = {
   menu: {
     title: "Menu",
+    item_modifiers: {
+      count_prefix: "Select",
+      count_sufix: "option",
+    }
   },
   signIn: {
     title: "Sign Up",
@@ -23,6 +27,7 @@ export const enUsTranslations: AppTranslations = {
     empty: "Your basket is empty",
     total: "Total",
     subtotal: "Sub total",
-    add_to_order: "Add to Order",
+    update_order: "Update Order",
+    updated: "Basket updated",
   },
 };

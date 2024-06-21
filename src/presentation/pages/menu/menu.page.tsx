@@ -47,7 +47,6 @@ const MenuBody: FunctionComponent = () => {
   return (
     <>
       <Input className="my-3" type="text" placeholder="Search" />
-
       <div className="menu-content bg-[#F8F9FA] flex gap-8 px-[40px] py-[32px]">
         <div className="w-[600px] bg-white shadow">
           <MenuSectionsTabs />
@@ -127,18 +126,31 @@ interface SectionItemProps {
 
 const SectionItem: FunctionComponent<SectionItemProps> = ({ item }) => {
   const { venue } = useSelector((state: IState) => state.venue);
+  const { basket } = useSelector((state: IState) => state.basket);
   const dispatch = useDispatch();
 
   const handleOpenChange = () => {
     dispatch(resetDraftBasket());
   };
 
+  const count = basket!.items.find((i) => i.item.id === item.id)?.quantity;
+
   return (
     <Dialog onOpenChange={handleOpenChange}>
       <DialogTrigger>
         <div className="flex items-center justify-between hover:bg-gray-50 px-[16px] py-3 cursor-pointer">
           <div className="flex flex-col gap-1 text-left">
-            <span className="font-bold text-base">{item.name}</span>
+            <header className="flex items-center gap-2">
+              {count && (
+                <div
+                  style={{ background: venue?.webSettings.primaryColour }}
+                  className=" min-w-[18px] min-h-[18px] rounded-sm flex items-center justify-center"
+                >
+                  <span className="text-white">{count}</span>
+                </div>
+              )}
+              <span className="font-bold text-base">{item.name}</span>
+            </header>
             {item.description && (
               <p className="text-base">{item.description}</p>
             )}

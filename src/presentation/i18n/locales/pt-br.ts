@@ -3,6 +3,10 @@ import { AppTranslations } from "../translations.interfaces";
 export const ptBrTranslations: AppTranslations = {
   menu: {
     title: "Menu",
+    item_modifiers: {
+      count_prefix: "Selecione",
+      count_sufix: "opção",
+    },
   },
   signIn: {
     title: "Entrar",
@@ -23,6 +27,7 @@ export const ptBrTranslations: AppTranslations = {
     empty: "Seu carrinho está vazio",
     total: "Total",
     subtotal: "Sub total",
-    add_to_order: "Adicionar ao Pedido",
+    update_order: "Atualizar Pedido",
+    updated: "Carrinho atualizado",
   },
 };

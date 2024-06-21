@@ -2,6 +2,8 @@ import { Translator } from "@presentation/i18n";
 import { IState } from "@presentation/store";
 import {
   addOneToBasket,
+  calculateBasketTotal,
+  calculateItemTotal,
   removeOneFromBasket,
 } from "@presentation/store/basket";
 import { Separator } from "@presentation/ui";
@@ -48,6 +50,7 @@ const BasketElementItem: FunctionComponent<BasketElementItemProps> = ({
   item,
 }: BasketElementItemProps) => {
   const { venue } = useSelector((state: IState) => state.venue);
+  const { basket } = useSelector((state: IState) => state.basket);
   const dispatch = useDispatch();
 
   const decreaseQuantity = () => {
@@ -58,15 +61,30 @@ const BasketElementItem: FunctionComponent<BasketElementItemProps> = ({
     dispatch(addOneToBasket(item));
   };
 
+  const modifiers = basket!.items.find(
+    (i) => i.item.id === item.item.id
+  )?.modifiers;
+
+  const price = calculateItemTotal(item.item, basket!);
+
   return (
     <li className=" p-[16px] border-b border-[#E5E5E5]">
       <div className="flex justify-between items-center">
         <p className="text-[#121212]">{item.item.name}</p>
         <p className="text-[#121212] font-semibold">
           {venue?.currency}
-          {(item.item.price * item.quantity).toFixed(2)}
+          {price.toFixed(2)}
         </p>
       </div>
+      {modifiers && (
+        <ul className="mb-2">
+          {modifiers.map((modifier) => (
+            <li key={modifier.id} className="text-gray-400">
+              + {modifier.name}
+            </li>
+          ))}
+        </ul>
+      )}
       <div className="flex gap-2 items-center">
         <BasketOperationButton text="-" onClick={decreaseQuantity} />
         <span>{item.quantity}</span>
@@ -83,11 +101,13 @@ interface BasketOperationButtonProps
 
 export const BasketOperationButton = (props: BasketOperationButtonProps) => {
   const { venue } = useSelector((state: IState) => state.venue);
-
   return (
     <button
       style={{ background: venue?.webSettings.primaryColour || "red" }}
-      className="w-[20px] h-[20px] text-white rounded-full flex items-center justify-center text-border"
+      className={cn(
+        "w-[20px] h-[20px] text-white rounded-full flex items-center justify-center text-border",
+        props.className
+      )}
       {...props}
     >
       {props.text}
@@ -99,27 +119,15 @@ const BasketFooter: FunctionComponent = () => {
   const { basket } = useSelector((state: IState) => state.basket);
   const { venue } = useSelector((state: IState) => state.venue);
 
-  const subTotal =
-    basket?.items.reduce(
-      (acc, item) => acc + item.item.price * item.quantity,
-      0
-    ) || 0;
-
-  const total =
-    basket?.items.reduce(
-      (acc, item) => acc + item.item.price * item.quantity,
-      0
-    ) || 0;
-
   const footerElements = [
     {
       text: "basket.subtotal",
-      value: venue?.currency + subTotal.toFixed(2),
+      value: venue!.currency + calculateBasketTotal(basket!).toFixed(2),
       font: "text-[16px]",
     },
     {
       text: "basket.total",
-      value: venue?.currency + total.toFixed(2),
+      value: venue!.currency + calculateBasketTotal(basket!).toFixed(2),
       font: "text-[24px]",
     },
   ];
@@ -128,8 +136,8 @@ const BasketFooter: FunctionComponent = () => {
     <footer className="bg-[#F8F9FA]">
       <div className="flex flex-col">
         {footerElements.map((element, index) => (
-          <>
-            <div key={element.text} className="flex justify-between p-[16px]">
+          <div key={element.text}>
+            <div className="flex justify-between p-[16px]">
               <span className={cn(element.font)}>
                 <Translator path={element.text} />
               </span>
@@ -138,7 +146,7 @@ const BasketFooter: FunctionComponent = () => {
               </span>
             </div>
             {index !== footerElements.length - 1 && <Separator />}
-          </>
+          </div>
         ))}
       </div>
     </footer>

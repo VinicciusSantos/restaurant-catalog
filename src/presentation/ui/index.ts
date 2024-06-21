@@ -3,6 +3,8 @@ export * from "./avatar";
 export * from "./button";
 export * from "./dialog";
 export * from "./input";
+export * from "./label";
+export * from "./radio-group";
 export * from "./separator";
 export * from "./sheet";
 export * from "./tabs";
