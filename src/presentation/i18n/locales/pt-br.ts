@@ -23,5 +23,6 @@ export const ptBrTranslations: AppTranslations = {
     empty: "Seu carrinho está vazio",
     total: "Total",
     subtotal: "Sub total",
+    add_to_order: "Adicionar ao Pedido",
   },
 };

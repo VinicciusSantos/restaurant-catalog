@@ -29,4 +29,5 @@ export interface BasketTranslations {
   empty: string;
   total: string;
   subtotal: string;
+  add_to_order: string;
 }

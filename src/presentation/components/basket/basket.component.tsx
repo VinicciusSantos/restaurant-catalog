@@ -68,9 +68,9 @@ const BasketElementItem: FunctionComponent<BasketElementItemProps> = ({
         </p>
       </div>
       <div className="flex gap-2 items-center">
-        <BasketOperationButton text="-" onClick={() => decreaseQuantity()} />
+        <BasketOperationButton text="-" onClick={decreaseQuantity} />
         <span>{item.quantity}</span>
-        <BasketOperationButton text="+" onClick={() => increaseQuantity()} />
+        <BasketOperationButton text="+" onClick={increaseQuantity} />
       </div>
     </li>
   );
@@ -81,7 +81,7 @@ interface BasketOperationButtonProps
   text: string;
 }
 
-const BasketOperationButton = (props: BasketOperationButtonProps) => {
+export const BasketOperationButton = (props: BasketOperationButtonProps) => {
   const { venue } = useSelector((state: IState) => state.venue);
 
   return (

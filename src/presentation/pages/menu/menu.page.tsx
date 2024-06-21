@@ -11,13 +11,17 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
+  DialogContent,
   Input,
 } from "@presentation/ui";
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 import { FunctionComponent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Section } from "../../../domain/models";
+import { Item, Section } from "../../../domain/models";
+import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
+import { ItemStratification } from "./modals/item-stratification.modal";
+import { resetDraftBasket } from "@presentation/store/basket";
 
 export const MenuPage: FunctionComponent = () => {
   const dispatch = useDispatch();
@@ -94,51 +98,67 @@ const MenuSectionsTabs: FunctionComponent = () => {
 
 const MenuSectionAccordion: FunctionComponent = () => {
   const { menu } = useSelector((state: IState) => state.menu);
-  const { venue } = useSelector((state: IState) => state.venue);
   const allSections = menu?.sections.map((section) => section.id.toString());
 
   return (
     <Accordion type="multiple" defaultValue={allSections}>
       {menu?.sections.map((section) => (
-        <AccordionItem
-          className="px-[16px]"
-          key={section.id}
-          value={section.id.toString()}
-        >
-          <AccordionTrigger className="text-xl">
+        <AccordionItem key={section.id} value={section.id.toString()}>
+          <AccordionTrigger className="text-xl px-[16px]">
             {section.name}
           </AccordionTrigger>
           <AccordionContent>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-2">
               {section.items.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex gap-4 items-center justify-between"
-                >
-                  <div className="flex flex-col gap-1">
-                    <span className="font-bold text-base">{item.name}</span>
-                    {item.description && (
-                      <p className="text-base">{item.description}</p>
-                    )}
-                    <p className="text-base font-bold text-[#464646]">
-                      {venue?.currency}
-                      {item.price.toFixed(2)}
-                    </p>
-                  </div>
-                  {item.images && item.images.length && (
-                    <img
-                      className="h-[85px] rounded-md"
-                      src={item.images[0].image}
-                      alt="food image"
-                    />
-                  )}
-                </div>
+                <SectionItem key={item.id} item={item} />
               ))}
             </div>
           </AccordionContent>
         </AccordionItem>
       ))}
     </Accordion>
+  );
+};
+
+interface SectionItemProps {
+  item: Item;
+}
+
+const SectionItem: FunctionComponent<SectionItemProps> = ({ item }) => {
+  const { venue } = useSelector((state: IState) => state.venue);
+  const dispatch = useDispatch();
+
+  const handleOpenChange = () => {
+    dispatch(resetDraftBasket());
+  };
+
+  return (
+    <Dialog onOpenChange={handleOpenChange}>
+      <DialogTrigger>
+        <div className="flex items-center justify-between hover:bg-gray-50 px-[16px] py-3 cursor-pointer">
+          <div className="flex flex-col gap-1 text-left">
+            <span className="font-bold text-base">{item.name}</span>
+            {item.description && (
+              <p className="text-base">{item.description}</p>
+            )}
+            <p className="text-base font-bold text-[#464646]">
+              {venue?.currency}
+              {item.price.toFixed(2)}
+            </p>
+          </div>
+          {item.images && item.images.length && (
+            <img
+              className="h-[85px] rounded-md"
+              src={item.images[0].image}
+              alt="food image"
+            />
+          )}
+        </div>
+      </DialogTrigger>
+      <DialogContent>
+        <ItemStratification item={item}></ItemStratification>
+      </DialogContent>
+    </Dialog>
   );
 };
 

@@ -1,6 +1,7 @@
 export * from "./accordion";
 export * from "./avatar";
 export * from "./button";
+export * from "./dialog";
 export * from "./input";
 export * from "./separator";
 export * from "./sheet";

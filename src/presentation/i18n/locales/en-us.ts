@@ -23,5 +23,6 @@ export const enUsTranslations: AppTranslations = {
     empty: "Your basket is empty",
     total: "Total",
     subtotal: "Sub total",
+    add_to_order: "Add to Order",
   },
 };
