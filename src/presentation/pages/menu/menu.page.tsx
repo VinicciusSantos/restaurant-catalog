@@ -2,6 +2,7 @@ import "./menu.styles.css";
 
 import { Banner, Basket } from "@presentation/components";
 import { IState } from "@presentation/store";
+import { resetDraftBasket } from "@presentation/store/basket";
 import { fetchMenu } from "@presentation/store/menu";
 import {
   Accordion,
@@ -11,7 +12,9 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
+  Dialog,
   DialogContent,
+  DialogTrigger,
   Input,
 } from "@presentation/ui";
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
@@ -19,9 +22,7 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Item, Section } from "../../../domain/models";
-import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
 import { ItemStratification } from "./modals/item-stratification.modal";
-import { resetDraftBasket } from "@presentation/store/basket";
 
 export const MenuPage: FunctionComponent = () => {
   const dispatch = useDispatch();
@@ -155,7 +156,7 @@ const SectionItem: FunctionComponent<SectionItemProps> = ({ item }) => {
           )}
         </div>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="p-0">
         <ItemStratification item={item}></ItemStratification>
       </DialogContent>
     </Dialog>
