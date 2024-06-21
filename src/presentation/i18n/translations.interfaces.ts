@@ -2,6 +2,7 @@ export interface AppTranslations {
   menu: MenuPageTranslations;
   signIn: SignInPageTranslations;
   contactUs: ContactUsPageTranslations;
+  basket: BasketTranslations;
 }
 
 interface PageTransations {
@@ -21,4 +22,11 @@ export interface ContactUsPageTranslations extends PageTransations {
     message_placeholder: string
     submit: string
   }
+}
+
+export interface BasketTranslations {
+  title: string;
+  empty: string;
+  total: string;
+  subtotal: string;
 }

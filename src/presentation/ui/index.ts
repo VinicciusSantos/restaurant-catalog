@@ -2,6 +2,7 @@ export * from "./accordion";
 export * from "./avatar";
 export * from "./button";
 export * from "./input";
+export * from "./separator";
 export * from "./sheet";
 export * from "./tabs";
 export * from "./textarea";

@@ -15,7 +15,13 @@ export const enUsTranslations: AppTranslations = {
       name_placeholder: "Name",
       email_placeholder: "Email",
       message_placeholder: "Message",
-      submit: "Send Message"
+      submit: "Send Message",
     },
+  },
+  basket: {
+    title: "Basket",
+    empty: "Your basket is empty",
+    total: "Total",
+    subtotal: "Sub total",
   },
 };

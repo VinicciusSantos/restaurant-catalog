@@ -33,7 +33,7 @@ export const ContactUsPage: FunctionComponent = () => {
               </h1>
               {addresses.map((address, index) => (
                 <div className="flex gap-4" key={address}>
-                  <p className="text-lg text-[#333] mb-2">
+                  <p className="text-lg font-bold text-[#333] mb-2">
                     {Translator({ path: "contactUs.address" })} {index + 1}:
                   </p>
                   <p className="text-lg text-[#333] mb-4">{address}</p>
