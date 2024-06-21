@@ -50,7 +50,7 @@ const basketSlice = createSlice({
       const existingItem = envSelected!.items.find(
         (i) => i.item.id === item.id
       );
-      if (existingItem) {
+      if (existingItem && existingItem.quantity) {
         existingItem.quantity -= 1;
 
         if (existingItem.quantity === 0) {
