@@ -1,12 +1,12 @@
 import { Banner } from "@presentation/components";
-import { Translator } from "@presentation/i18n";
-import { IState } from "@presentation/store";
 import { Button, Input, Textarea } from "@presentation/ui";
 import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 
+import { Translator } from "../../../i18n";
 import { usecasesFactory } from "../../../main";
+import { IState } from "../../../store";
 
 type FormValues = {
   name: string;

@@ -1,6 +1,6 @@
-import { Menu } from "src/domain/models";
+import { Menu } from "../../../domain/models";
 import { HttpClient, HttpMethod } from "../../../domain/protocols";
-import { IUsecase } from "src/domain/usecases";
+import { IUsecase } from "../../../domain/usecases";
 
 export type GetMenuResponse = Menu | null;
 

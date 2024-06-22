@@ -1,16 +1,17 @@
-import { Translator } from "@presentation/i18n";
-import { IState } from "@presentation/store";
+import { Separator } from "@presentation/ui";
+import { cn } from "@presentation/utils/shadcn";
+import { ButtonHTMLAttributes, FunctionComponent } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { BasketItem } from "../../../domain/models";
+import { Translator } from "../../../i18n";
+import { IState } from "../../../store";
 import {
   addOneToBasket,
   calculateBasketTotal,
   calculateItemTotal,
   removeOneFromBasket,
-} from "@presentation/store/basket";
-import { Separator } from "@presentation/ui";
-import { cn } from "@presentation/utils/shadcn";
-import { ButtonHTMLAttributes, FunctionComponent } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { BasketItem } from "src/domain/models";
+} from "../../../store/basket";
 
 export const Basket: FunctionComponent = () => {
   const { basket } = useSelector((state: IState) => state.basket);

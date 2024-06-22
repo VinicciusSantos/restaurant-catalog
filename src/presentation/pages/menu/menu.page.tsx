@@ -1,9 +1,6 @@
 import "./menu.styles.css";
 
 import { Banner, Basket } from "@presentation/components";
-import { IState } from "@presentation/store";
-import { resetDraftBasket } from "@presentation/store/basket";
-import { fetchMenu } from "@presentation/store/menu";
 import {
   Accordion,
   AccordionContent,
@@ -20,10 +17,13 @@ import {
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 import { FunctionComponent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { UnknownAction } from "redux";
 
 import { Item, Section } from "../../../domain/models";
+import { IState } from "../../../store";
+import { resetDraftBasket } from "../../../store/basket";
+import { fetchMenu } from "../../../store/menu";
 import { ItemStratification } from "./modals/item-stratification.modal";
-import { UnknownAction } from "redux";
 
 export const MenuPage: FunctionComponent = () => {
   const dispatch = useDispatch();

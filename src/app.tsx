@@ -1,10 +1,11 @@
 import { Header } from "@presentation/components";
-import { IState } from "@presentation/store";
-import { fetchVenue } from "@presentation/store/venue";
 import { FunctionComponent, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { UnknownAction } from "redux";
+
+import { IState } from "./store";
+import { fetchVenue } from "./store/venue";
 
 export const App: FunctionComponent = () => {
   const dispatch = useDispatch();

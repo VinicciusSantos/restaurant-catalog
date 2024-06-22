@@ -1,7 +1,5 @@
 import "./header.styles.css";
 
-import { Translator } from "@presentation/i18n";
-import { IState } from "@presentation/store";
 import {
   Button,
   Sheet,
@@ -15,6 +13,9 @@ import { FunctionComponent } from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
+import { Translator } from "../../../i18n";
+import { IState } from "../../../store";
+
 const links = [
   { to: "/", label: "menu.title" },
   { to: "/sign-in", label: "signIn.title" },
@@ -22,8 +23,10 @@ const links = [
 ];
 
 export const Header: FunctionComponent = () => {
-  const webSettings = useSelector((state: IState) => state.venue.venue?.webSettings);
-  const location = useLocation(); 
+  const webSettings = useSelector(
+    (state: IState) => state.venue.venue?.webSettings
+  );
+  const location = useLocation();
 
   const currentPage = links.find(({ to }) => to === location.pathname);
 

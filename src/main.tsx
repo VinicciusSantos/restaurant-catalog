@@ -1,16 +1,16 @@
 import './index.css';
 
-import { setupInternationalizations } from '@presentation/i18n';
 import { router } from '@presentation/router';
+import { Toaster } from '@presentation/ui';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
 
 import { UsecasesFactory } from './data/factory';
+import { setupInternationalizations } from './i18n';
 import { AxiosHttpClient } from './infra/protocols';
-import { store } from './presentation/store';
-import { Toaster } from '@presentation/ui';
+import { store } from './store';
 
 setupInternationalizations();
 

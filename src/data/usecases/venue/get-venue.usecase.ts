@@ -1,6 +1,6 @@
-import { Venue } from "src/domain/models";
+import { Venue } from "../../../domain/models";
 import { HttpClient, HttpMethod } from "../../../domain/protocols";
-import { IUsecase } from "src/domain/usecases";
+import { IUsecase } from "../../../domain/usecases";
 
 export type GetVenueResponse = Venue | null;
 

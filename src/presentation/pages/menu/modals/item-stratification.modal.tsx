@@ -1,19 +1,19 @@
-import { toast } from "@presentation/hooks";
-import { Translator } from "@presentation/i18n";
-import { IState } from "@presentation/store";
+import { Button, DialogClose, RadioGroup } from "@presentation/ui";
+import { Dot } from "lucide-react";
+import { FunctionComponent } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { Item, Modifier, ModifierItem } from "../../../../domain/models";
+import { toast } from "../../../../hooks";
+import { Translator } from "../../../../i18n";
+import { IState } from "../../../../store";
 import {
   addOneToBasket,
   calculateItemTotal,
   ChangeModifier,
   removeOneFromBasket,
   syncBasket,
-} from "@presentation/store/basket";
-import { Button, DialogClose, RadioGroup } from "@presentation/ui";
-import { FunctionComponent } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-import { Item, Modifier, ModifierItem } from "../../../../domain/models";
-import { Dot } from "lucide-react";
+} from "../../../../store/basket";
 
 interface ItemStratificationProps {
   item: Item;

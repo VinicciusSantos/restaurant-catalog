@@ -3,7 +3,7 @@ import {
   IMenuFactory,
   IUsecasesFactory,
   IVenuesFactory,
-} from "src/domain/factory";
+} from "../../domain/factory";
 
 import { HttpClient } from "../../domain/protocols/http";
 import { SendMessageUsecase } from "../usecases/contact";

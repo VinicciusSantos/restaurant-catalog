@@ -1,8 +1,9 @@
 import "./banner.styles.css";
 
-import { IState } from "@presentation/store";
 import { FunctionComponent } from "react";
 import { useSelector } from "react-redux";
+
+import { IState } from "../../../store";
 
 export const Banner: FunctionComponent = () => {
   const webSettings = useSelector(

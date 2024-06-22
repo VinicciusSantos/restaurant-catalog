@@ -1,7 +1,7 @@
 import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
 
-import { Menu } from "../../../domain/models";
-import { usecasesFactory } from "../../../main";
+import { Menu } from "../../domain/models";
+import { usecasesFactory } from "../../main";
 
 export interface MenuState {
   menu: Menu | null;

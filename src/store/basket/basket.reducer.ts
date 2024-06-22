@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { Item, ModifierItem } from "../../../domain/models";
+import { Item, ModifierItem } from "../../domain/models";
 
 interface StoredModifier extends ModifierItem {
   quantity: number;

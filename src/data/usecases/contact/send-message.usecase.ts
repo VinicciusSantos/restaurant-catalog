@@ -1,5 +1,5 @@
-import { toast } from "@presentation/hooks";
-import { IUsecase } from "src/domain/usecases";
+import { toast } from "../../../hooks";
+import { IUsecase } from "../../../domain/usecases";
 
 export interface SendMessageInput {
   name: string;

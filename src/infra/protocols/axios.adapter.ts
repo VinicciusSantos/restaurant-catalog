@@ -1,6 +1,6 @@
 import axios, { AxiosHeaders } from "axios";
 import { HttpClient, HttpRequest, HttpResponse } from "../../domain/protocols";
-import { toast } from "@presentation/hooks";
+import { toast } from "../../hooks";
 
 export class AxiosHttpClient implements HttpClient<AxiosHeaders> {
   constructor() {

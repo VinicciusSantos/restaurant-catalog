@@ -1,6 +1,7 @@
 import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
-import { Venue } from "../../../domain/models";
-import { usecasesFactory } from "../../../main";
+
+import { Venue } from "../../domain/models";
+import { usecasesFactory } from "../../main";
 
 export interface VenueState {
   venue: Venue | null;
