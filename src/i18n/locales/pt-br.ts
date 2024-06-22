@@ -30,4 +30,12 @@ export const ptBrTranslations: AppTranslations = {
     update_order: "Atualizar Pedido",
     updated: "Carrinho atualizado",
   },
+  languageToggle: {
+    select_language: "Selecione o idioma",
+    language_changed: {
+      title: "Idioma alterado",
+      description:
+        "Alguns textos vindos da API podem não estar traduzidos.",
+    },
+  },
 };

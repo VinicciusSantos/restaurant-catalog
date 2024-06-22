@@ -4,7 +4,7 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 import { ptBrTranslations, enUsTranslations } from "./locales";
 
-const i18nConfig = {
+export const i18nConfig = {
   resources: {
     "pt-BR": { translations: ptBrTranslations },
     "en-US": { translations: enUsTranslations },

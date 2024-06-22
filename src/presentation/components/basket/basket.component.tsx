@@ -4,7 +4,6 @@ import { ButtonHTMLAttributes, FunctionComponent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { BasketItem } from "../../../domain/models";
-import { Translator } from "../../../i18n";
 import { IState } from "../../../store";
 import {
   addOneToBasket,
@@ -12,6 +11,7 @@ import {
   calculateItemTotal,
   removeOneFromBasket,
 } from "../../../store/basket";
+import { Translator } from "../../../i18n";
 
 export const Basket: FunctionComponent = () => {
   const { basket } = useSelector((state: IState) => state.basket);

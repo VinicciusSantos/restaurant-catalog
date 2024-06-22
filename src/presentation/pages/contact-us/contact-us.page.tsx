@@ -2,6 +2,7 @@ import { Banner } from "@presentation/components";
 import { Button, Input, Textarea } from "@presentation/ui";
 import { FunctionComponent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
 import { Translator } from "../../../i18n";
@@ -15,6 +16,7 @@ type FormValues = {
 };
 
 export const ContactUsPage: FunctionComponent = () => {
+  const { t } = useTranslation();
   const { venue } = useSelector((state: IState) => state.venue);
   const color = venue?.webSettings?.primaryColour || "#e63946";
   const addresses = [venue?.address1, venue?.address2, venue?.address3].filter(
@@ -34,7 +36,7 @@ export const ContactUsPage: FunctionComponent = () => {
               {addresses.map((address, index) => (
                 <div className="flex gap-4" key={address}>
                   <p className="text-lg font-bold text-[#333] mb-2">
-                    {Translator({ path: "contactUs.address" })} {index + 1}:
+                    {t("contactUs.address")} {index + 1}:
                   </p>
                   <p className="text-lg text-[#333] mb-4">{address}</p>
                 </div>
@@ -50,6 +52,8 @@ export const ContactUsPage: FunctionComponent = () => {
 
 const SendMessageForm: FunctionComponent = () => {
   const { venue } = useSelector((state: IState) => state.venue);
+  const { t } = useTranslation();
+
   const color = venue?.webSettings?.primaryColour || "#e63946";
 
   const {
@@ -72,9 +76,7 @@ const SendMessageForm: FunctionComponent = () => {
         <div>
           <Input
             type="text"
-            placeholder={Translator({
-              path: "contactUs.form.name_placeholder",
-            })}
+            placeholder={t("contactUs.form.name_placeholder")}
             {...register("name", { required: true })}
             className="px-4 py-2 rounded-md border border-[#ccc] focus:outline-none focus:ring-2 focus:ring-[#e63946]"
           />
@@ -83,9 +85,7 @@ const SendMessageForm: FunctionComponent = () => {
         <div>
           <Input
             type="email"
-            placeholder={Translator({
-              path: "contactUs.form.email_placeholder",
-            })}
+            placeholder={t("contactUs.form.email_placeholder")}
             {...register("email", { required: true })}
             className="px-4 py-2 rounded-md border border-[#ccc] focus:outline-none focus:ring-2 focus:ring-[#e63946]"
           />
@@ -93,9 +93,7 @@ const SendMessageForm: FunctionComponent = () => {
         </div>
         <div>
           <Textarea
-            placeholder={Translator({
-              path: "contactUs.form.message_placeholder",
-            })}
+            placeholder={t("contactUs.form.message_placeholder")}
             {...register("message", { required: true })}
             className="px-4 py-2 rounded-md border border-[#ccc] focus:outline-none focus:ring-2 focus:ring-[#e63946]"
           />
@@ -108,7 +106,7 @@ const SendMessageForm: FunctionComponent = () => {
           className="text-white px-4 py-2 rounded-md"
           style={{ background: color }}
         >
-          Send Message
+          {t("contactUs.form.submit")}
         </Button>
       </form>
     </div>

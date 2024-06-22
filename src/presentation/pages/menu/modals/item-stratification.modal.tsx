@@ -14,6 +14,7 @@ import {
   removeOneFromBasket,
   syncBasket,
 } from "../../../../store/basket";
+import { useTranslation } from "react-i18next";
 
 interface ItemStratificationProps {
   item: Item;
@@ -147,6 +148,7 @@ const ItemOptionModifierOption: FunctionComponent<ItemOptionModifierProps> = ({
 const ItemStratificationFooter: FunctionComponent<ItemStratificationProps> = ({
   item,
 }) => {
+  const { t } = useTranslation();
   const { venue } = useSelector((state: IState) => state.venue);
   const { draftBasket, basket } = useSelector((state: IState) => state.basket);
   const dispatch = useDispatch();
@@ -174,7 +176,7 @@ const ItemStratificationFooter: FunctionComponent<ItemStratificationProps> = ({
   const syncRealBasket = () => {
     dispatch(syncBasket());
     toast({
-      title: Translator({ path: "basket.updated" }),
+      title: t("basket.updated"),
     });
   };
 

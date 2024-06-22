@@ -6,7 +6,7 @@ export const enUsTranslations: AppTranslations = {
     item_modifiers: {
       count_prefix: "Select",
       count_sufix: "option",
-    }
+    },
   },
   signIn: {
     title: "Sign Up",
@@ -29,5 +29,12 @@ export const enUsTranslations: AppTranslations = {
     subtotal: "Sub total",
     update_order: "Update Order",
     updated: "Basket updated",
+  },
+  languageToggle: {
+    select_language: "Select Language",
+    language_changed: {
+      title: "Language Changed",
+      description: "Language changed to english with success",
+    },
   },
 };

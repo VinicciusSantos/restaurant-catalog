@@ -150,7 +150,7 @@ const SectionItem: FunctionComponent<SectionItemProps> = ({ item }) => {
     <Dialog onOpenChange={handleOpenChange}>
       <DialogTrigger>
         <div className="flex items-center justify-between hover:bg-gray-50 px-[16px] py-3 cursor-pointer">
-          <div className="flex flex-col gap-1 text-left">
+          <div className="flex flex-col mr-4 gap-1 text-left">
             <header className="flex items-center gap-2">
               {count && (
                 <div

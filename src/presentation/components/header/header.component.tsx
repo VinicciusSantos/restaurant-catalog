@@ -15,6 +15,7 @@ import { Link, useLocation } from "react-router-dom";
 
 import { Translator } from "../../../i18n";
 import { IState } from "../../../store";
+import { LanguageToggle } from "../language-toggle";
 
 const links = [
   { to: "/", label: "menu.title" },
@@ -46,6 +47,8 @@ export const Header: FunctionComponent = () => {
           </Link>
         ))}
       </nav>
+
+      <LanguageToggle className="absolute right-12" />
 
       <nav className="md:hidden flex items-center justify-center w-full">
         <Link to={currentPage!.to} className="header__nav-item">
