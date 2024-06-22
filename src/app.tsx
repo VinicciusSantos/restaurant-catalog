@@ -6,6 +6,7 @@ import { UnknownAction } from "redux";
 
 import { IState } from "./store";
 import { fetchVenue } from "./store/venue";
+import { Translator } from "./i18n";
 
 export const App: FunctionComponent = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ export const App: FunctionComponent = () => {
     dispatch(fetchVenue() as unknown as UnknownAction);
   }, [dispatch]);
 
-  return <div>{loading ? <Loader /> : venue ? <AppBody /> : <NoData />}</div>;
+  return <div>{loading ? <></> : venue ? <AppBody /> : <NoData />}</div>;
 };
 
 const AppBody: FunctionComponent = () => {
@@ -30,10 +31,6 @@ const AppBody: FunctionComponent = () => {
   );
 };
 
-const Loader: FunctionComponent = () => {
-  return <p>Carregando...</p>;
-};
-
 const NoData: FunctionComponent = () => {
-  return <p>Dados do venue não disponíveis.</p>;
+  return <Translator path="noData" />;
 };

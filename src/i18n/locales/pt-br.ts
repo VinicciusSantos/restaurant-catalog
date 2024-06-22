@@ -38,4 +38,5 @@ export const ptBrTranslations: AppTranslations = {
         "Alguns textos vindos da API podem não estar traduzidos.",
     },
   },
+  noData: "Dados do local não encontrados", 
 };

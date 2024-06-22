@@ -37,4 +37,5 @@ export const enUsTranslations: AppTranslations = {
       description: "Language changed to english with success",
     },
   },
+  noData: "Venue data not found", 
 };
