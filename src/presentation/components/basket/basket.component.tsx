@@ -57,6 +57,11 @@ const YourBasketButton: FunctionComponent = () => {
     });
   };
 
+  const countItems = basket?.items.reduce(
+    (acc, item) => acc + item.quantity,
+    0
+  );
+
   return (
     <>
       {basket?.items.length ? (
@@ -69,7 +74,7 @@ const YourBasketButton: FunctionComponent = () => {
               <Translator path="basket.your_basket" />
               <Dot />
               <div className="flex gap-1">
-                <span>{basket!.items.length}</span>
+                <span>{countItems}</span>
                 <Translator path="basket.items" />
               </div>
             </Button>
