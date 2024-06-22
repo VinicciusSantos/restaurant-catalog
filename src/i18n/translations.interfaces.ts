@@ -4,6 +4,7 @@ export interface AppTranslations {
   contactUs: ContactUsPageTranslations;
   basket: BasketTranslations;
   languageToggle: LanguageToggleTranslations;
+  noData: string;
 }
 
 interface PageTransations {
