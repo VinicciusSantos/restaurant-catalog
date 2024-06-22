@@ -59,7 +59,7 @@ const YourBasketButton: FunctionComponent = () => {
 
   return (
     <>
-      {basket?.items.length && (
+      {basket?.items.length ? (
         <Dialog>
           <DialogTrigger>
             <Button
@@ -76,7 +76,7 @@ const YourBasketButton: FunctionComponent = () => {
           </DialogTrigger>
           <DialogContent className="p-0 h-screen flex flex-col">
             <DialogTitle>
-              <div className="absolute left-1/2 w-screen h-14 flex items-center justify-center">
+              <div className="absolute left-1/2 -translate-x-1/2 w-screen h-14 flex items-center justify-center">
                 <Translator path="basket.title" />
               </div>
             </DialogTitle>
@@ -94,6 +94,8 @@ const YourBasketButton: FunctionComponent = () => {
             </div>
           </DialogContent>
         </Dialog>
+      ) : (
+        <></>
       )}
     </>
   );
