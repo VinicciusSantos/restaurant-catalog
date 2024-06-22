@@ -41,6 +41,7 @@ export interface BasketTranslations {
   updated: string;
   your_basket: string;
   items: string;
+  checkout_now: string;
 }
 
 export interface LanguageToggleTranslations {
