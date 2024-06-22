@@ -6,14 +6,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@presentation/ui';
-import { cn } from '@presentation/utils/shadcn';
-import { BR, US } from 'country-flag-icons/react/3x2';
-import { CheckIcon, ChevronDownIcon } from 'lucide-react';
-import React, { FunctionComponent, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+} from "@presentation/ui";
+import { cn } from "@presentation/utils/shadcn";
+import { BR, US } from "country-flag-icons/react/3x2";
+import { CheckIcon, ChevronDownIcon } from "lucide-react";
+import React, { FunctionComponent, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { toast } from '../../../hooks';
+import { toast } from "../../../hooks";
 
 interface LanguageToggleProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -58,17 +58,19 @@ export const LanguageToggle: FunctionComponent<LanguageToggleProps> = (
     <div className={cn("flex items-center gap-4", props.className)}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="flex items-center gap-2">
+          <Button variant="outline" className="flex items-center gap-2 p-3">
             {currentLanguage ? (
               <>
                 <currentLanguage.flag
                   className="w-4"
                   title={currentLanguage.name}
                 />
-                <span>{currentLanguage.name}</span>
-                <ChevronDownIcon className="h-4 w-4" />
+                <span className="hidden md:hidden lg:block sm:block">{currentLanguage.name}</span>
+                <ChevronDownIcon className=" hidden h-4 w-4 sm:block md:block" />
               </>
-            ): <>{selectedLanguage}</>}
+            ) : (
+              <>{selectedLanguage}</>
+            )}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[180px]">

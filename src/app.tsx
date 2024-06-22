@@ -32,5 +32,5 @@ const AppBody: FunctionComponent = () => {
 };
 
 const NoData: FunctionComponent = () => {
-  return <Translator path="noData" />;
+  return <Translator path="no-data" />;
 };

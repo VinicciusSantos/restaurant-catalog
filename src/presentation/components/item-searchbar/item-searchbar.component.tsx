@@ -41,12 +41,11 @@ export const ItemSearchbar: FunctionComponent<ItemSearchbarProps> = () => {
         value={searchValue}
         className="my-3 outline-none outline-1 outline-[#DADADA]"
         type="text"
-        overflow-y-auto
         placeholder={t("searchbar.search_placeholder") as string}
         onChange={handleSearch}
       />
       {searchValue && isComponentVisible && (
-        <ul className="absolute z-10 bg-white p-4 rounded shadow w-2/3 flex flex-col max-h-60 overflow-y-auto">
+        <ul className="absolute z-10 bg-white p-4 rounded w-full shadow sm:w-2/3 flex flex-col max-h-60 overflow-y-auto">
           {filteredItems.length ? (
             filteredItems.map((item) => (
               <SectionItem item={item} key={item.id.toString()} />

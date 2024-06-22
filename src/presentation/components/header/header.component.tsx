@@ -48,7 +48,7 @@ export const Header: FunctionComponent = () => {
         ))}
       </nav>
 
-      <LanguageToggle className="absolute right-12" />
+      <LanguageToggle className="absolute right-20 sm:right-24 lg:right-12 md:right-2" />
 
       <nav className="md:hidden flex items-center justify-center w-full">
         <Link to={currentPage!.to} className="header__nav-item">

@@ -1,9 +1,19 @@
-import { Separator } from "@presentation/ui";
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+  Separator,
+} from "@presentation/ui";
 import { cn } from "@presentation/utils/shadcn";
+import { Dot } from "lucide-react";
 import { ButtonHTMLAttributes, FunctionComponent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { BasketItem } from "../../../domain/models";
+import { toast } from "../../../hooks";
+import { Translator } from "../../../i18n";
 import { IState } from "../../../store";
 import {
   addOneToBasket,
@@ -11,35 +21,108 @@ import {
   calculateItemTotal,
   removeOneFromBasket,
 } from "../../../store/basket";
-import { Translator } from "../../../i18n";
 
-export const Basket: FunctionComponent = () => {
+interface BasketProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+export const Basket: FunctionComponent<BasketProps> = ({ className }) => {
+  return (
+    <>
+      <YourBasketButton />
+      <div
+        className={cn(
+          "md:flex flex-col w-[320px] shadow h-min hidden",
+          className
+        )}
+      >
+        <header className="p-[22px] text-[24px] font-bold bg-[#F8F9FA]">
+          <p className="text-[#464646]">
+            <Translator path="basket.title" />
+          </p>
+        </header>
+        <BasketItems />
+      </div>
+    </>
+  );
+};
+
+const YourBasketButton: FunctionComponent = () => {
+  const { venue } = useSelector((state: IState) => state.venue);
+  const { basket } = useSelector((state: IState) => state.basket);
+
+  const checkout = () => {
+    toast({
+      title: "Checkout not implemented yet",
+      description: "This feature is not available yet",
+      variant: "destructive",
+    });
+  };
+
+  return (
+    <>
+      {basket?.items.length && (
+        <Dialog>
+          <DialogTrigger>
+            <Button
+              className="fixed bottom-10 w-4/5 left-1/2 -translate-x-1/2 md:hidden rounded-full"
+              style={{ background: venue?.webSettings.primaryColour }}
+            >
+              <Translator path="basket.your_basket" />
+              <Dot />
+              <div className="flex gap-1">
+                <span>{basket!.items.length}</span>
+                <Translator path="basket.items" />
+              </div>
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="p-0 h-screen flex flex-col">
+            <DialogTitle>
+              <div className="absolute left-1/2 w-screen h-14 flex items-center justify-center">
+                <Translator path="basket.title" />
+              </div>
+            </DialogTitle>
+            <div className="mt-16">
+              <BasketItems />
+            </div>
+            <div className="px-4 w-full absolute bottom-10">
+              <Button
+                className="rounded-full w-full "
+                style={{ background: venue?.webSettings.primaryColour }}
+                onClick={checkout}
+              >
+                <Translator path="basket.checkout_now" />
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
+    </>
+  );
+};
+
+export default YourBasketButton;
+
+interface BasketItemsProps {}
+
+const BasketItems: FunctionComponent<BasketItemsProps> = () => {
   const { basket } = useSelector((state: IState) => state.basket);
 
   return (
-    <div className="flex flex-col w-[320px] shadow h-min">
-      <header className="p-[22px] text-[24px] font-bold bg-[#F8F9FA]">
-        <p className="text-[#464646]">
-          <Translator path="basket.title" />
-        </p>
-      </header>
-      <main className="bg-[#FFFFFF]">
-        {basket?.items.length ? (
-          <>
-            <ul>
-              {basket.items.map((item) => (
-                <BasketElementItem key={item.item.id} item={item} />
-              ))}
-            </ul>
-            <BasketFooter />
-          </>
-        ) : (
-          <div className="m-[22px]">
-            <Translator path="basket.empty" />
-          </div>
-        )}
-      </main>
-    </div>
+    <main className="bg-[#FFFFFF]">
+      {basket?.items.length ? (
+        <>
+          <ul>
+            {basket.items.map((item) => (
+              <BasketElementItem key={item.item.id} item={item} />
+            ))}
+          </ul>
+          <BasketFooter />
+        </>
+      ) : (
+        <div className="m-[22px]">
+          <Translator path="basket.empty" />
+        </div>
+      )}
+    </main>
   );
 };
 

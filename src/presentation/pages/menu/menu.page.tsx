@@ -1,6 +1,6 @@
-import "./menu.styles.css";
+import './menu.styles.css';
 
-import { Banner, Basket, ItemSearchbar } from "@presentation/components";
+import { Banner, Basket, ItemSearchbar } from '@presentation/components';
 import {
   Accordion,
   AccordionContent,
@@ -11,19 +11,20 @@ import {
   AvatarImage,
   Dialog,
   DialogContent,
+  DialogTitle,
   DialogTrigger,
   Skeleton,
-} from "@presentation/ui";
-import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
-import { FunctionComponent, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+} from '@presentation/ui';
+import { cn } from '@presentation/utils/shadcn';
+import { Tabs, TabsList, TabsTrigger } from '@radix-ui/react-tabs';
+import { FunctionComponent, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Item, Section } from "../../../domain/models";
-import { IState } from "../../../store";
-import { resetDraftBasket } from "../../../store/basket";
-import { fetchMenu, syncOpenSections } from "../../../store/menu";
-import { ItemStratification } from "./modals/item-stratification.modal";
-import { cn } from "@presentation/utils/shadcn";
+import { Item, Section } from '../../../domain/models';
+import { IState } from '../../../store';
+import { resetDraftBasket } from '../../../store/basket';
+import { fetchMenu, syncOpenSections } from '../../../store/menu';
+import { ItemStratification } from './modals/item-stratification.modal';
 
 export const MenuPage: FunctionComponent = () => {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ export const MenuPage: FunctionComponent = () => {
   return (
     <div className="flex flex-col items-center">
       <Banner />
-      <div className="w-[1024px]">
+      <div className="max-w-[1024px] w-full">
         {loading ? <Loader /> : menu ? <MenuBody /> : <NoData />}
       </div>
     </div>
@@ -46,16 +47,16 @@ export const MenuPage: FunctionComponent = () => {
 
 const MenuBody: FunctionComponent = () => {
   return (
-    <>
-      <ItemSearchbar />
-      <div className="menu-content bg-[#F8F9FA] flex gap-8 px-[40px] py-[32px]">
-        <div className="w-[600px] bg-white shadow">
-          <MenuSectionsTabs />
-          <MenuSectionAccordion />
+      <div className="w-full">
+        <ItemSearchbar />
+        <div className="menu-content bg-[#F8F9FA] flex gap-8 sm:px-[40px] sm:py-[32px] w-full relative">
+          <div className="w-full lg:w-[600px] bg-white shadow">
+            <MenuSectionsTabs />
+            <MenuSectionAccordion />
+          </div>
+          <Basket />
         </div>
-        <Basket />
       </div>
-    </>
   );
 };
 
@@ -77,7 +78,7 @@ const MenuSectionsTabs: FunctionComponent = () => {
 
   return (
     <Tabs className="px-[16px] py-[20px]">
-      <TabsList className="flex gap-3 w-full">
+      <TabsList className="flex gap-3 w-full overflow-x-auto">
         {menu?.sections.map((section) => (
           <TabsTrigger
             key={section.id}
@@ -135,7 +136,10 @@ interface SectionItemProps extends React.HTMLAttributes<HTMLDivElement> {
   item: Item;
 }
 
-export const SectionItem: FunctionComponent<SectionItemProps> = ({ item, className }) => {
+export const SectionItem: FunctionComponent<SectionItemProps> = ({
+  item,
+  className,
+}) => {
   const { venue } = useSelector((state: IState) => state.venue);
   const { basket } = useSelector((state: IState) => state.basket);
   const dispatch = useDispatch();
@@ -149,7 +153,12 @@ export const SectionItem: FunctionComponent<SectionItemProps> = ({ item, classNa
   return (
     <Dialog onOpenChange={handleOpenChange}>
       <DialogTrigger>
-        <div className={cn("flex items-center justify-between hover:bg-gray-50 px-[16px] py-3 cursor-pointer", className )}>
+        <div
+          className={cn(
+            "flex items-center justify-between hover:bg-gray-50 px-[16px] py-3 cursor-pointer",
+            className
+          )}
+        >
           <div className="flex flex-col mr-4 gap-1 text-left">
             <header className="flex items-center gap-2">
               {count && (
@@ -163,7 +172,7 @@ export const SectionItem: FunctionComponent<SectionItemProps> = ({ item, classNa
               <span className="font-bold text-base">{item.name}</span>
             </header>
             {item.description && (
-              <p className="text-base">{item.description}</p>
+              <p className="text-base text line-clamp-2">{item.description}</p>
             )}
             <p className="text-base font-bold text-[#464646]">
               {venue?.currency}
@@ -180,6 +189,7 @@ export const SectionItem: FunctionComponent<SectionItemProps> = ({ item, classNa
         </div>
       </DialogTrigger>
       <DialogContent className="p-0">
+        <DialogTitle className="hidden">{item.name}</DialogTitle>
         <ItemStratification item={item}></ItemStratification>
       </DialogContent>
     </Dialog>
@@ -188,10 +198,10 @@ export const SectionItem: FunctionComponent<SectionItemProps> = ({ item, classNa
 
 const Loader: FunctionComponent = () => {
   return (
-    <div className="w-[1024px]">
+    <div className="max-w-[1024px] w-full">
       <Skeleton className="my-3 h-10 w-full" />
-      <div className="menu-content bg-[#F8F9FA] flex gap-8 px-[40px] py-[32px]">
-        <div className="w-[600px] bg-white shadow p-4">
+      <div className="menu-content bg-[#F8F9FA] flex gap-8  sm:px-[40px] sm:py-[32px]">
+        <div className="w-full lg:w-[600px] bg-white shadow p-4">
           <Skeleton className="h-20 w-full mb-4" />
           <div className="space-y-4">
             {[...Array(3)].map((_, index) => (

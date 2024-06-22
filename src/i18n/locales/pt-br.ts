@@ -29,6 +29,9 @@ export const ptBrTranslations: AppTranslations = {
     subtotal: "Sub total",
     update_order: "Atualizar Pedido",
     updated: "Carrinho atualizado",
+    your_basket: "Seu Carrinho",
+    items: "itens",
+    checkout_now: "Finalizar Pedido",
   },
   languageToggle: {
     select_language: "Selecione o idioma",

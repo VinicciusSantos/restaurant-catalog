@@ -11,6 +11,7 @@
   align-items: center;
   gap: 16px;
   position: relative;
+  padding: 5px;
 
   .avatar {
     border: 2px white solid;

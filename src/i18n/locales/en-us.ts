@@ -29,6 +29,9 @@ export const enUsTranslations: AppTranslations = {
     subtotal: "Sub total",
     update_order: "Update Order",
     updated: "Basket updated",
+    your_basket: "Your Basket",
+    items: "items",
+    checkout_now: "Checkout Now",
   },
   languageToggle: {
     select_language: "Select Language",

@@ -39,6 +39,8 @@ export interface BasketTranslations {
   subtotal: string;
   update_order: string;
   updated: string;
+  your_basket: string;
+  items: string;
 }
 
 export interface LanguageToggleTranslations {
