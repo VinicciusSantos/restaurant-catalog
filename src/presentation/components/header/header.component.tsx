@@ -23,7 +23,7 @@ const links = [
 ];
 
 export const Header: FunctionComponent = () => {
-  const { venue, loading } = useSelector((state: IState) => state.venue);
+  const { venue } = useSelector((state: IState) => state.venue);
   const location = useLocation();
 
   const currentPage = links.find(({ to }) => to === location.pathname);
