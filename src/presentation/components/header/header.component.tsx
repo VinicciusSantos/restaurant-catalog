@@ -23,9 +23,7 @@ const links = [
 ];
 
 export const Header: FunctionComponent = () => {
-  const webSettings = useSelector(
-    (state: IState) => state.venue.venue?.webSettings
-  );
+  const { venue, loading } = useSelector((state: IState) => state.venue);
   const location = useLocation();
 
   const currentPage = links.find(({ to }) => to === location.pathname);
@@ -39,7 +37,7 @@ export const Header: FunctionComponent = () => {
   return (
     <header
       className="header w-full"
-      style={{ backgroundColor: webSettings?.navBackgroundColour }}
+      style={{ backgroundColor: venue!.webSettings?.navBackgroundColour }}
     >
       <nav className="hidden header__nav md:flex">
         {links.map(({ to, label }) => (

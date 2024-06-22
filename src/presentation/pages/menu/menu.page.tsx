@@ -13,16 +13,16 @@ import {
   DialogContent,
   DialogTrigger,
   Input,
+  Skeleton,
 } from "@presentation/ui";
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 import { FunctionComponent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { UnknownAction } from "redux";
 
 import { Item, Section } from "../../../domain/models";
 import { IState } from "../../../store";
 import { resetDraftBasket } from "../../../store/basket";
-import { fetchMenu } from "../../../store/menu";
+import { fetchMenu, syncOpenSections } from "../../../store/menu";
 import { ItemStratification } from "./modals/item-stratification.modal";
 
 export const MenuPage: FunctionComponent = () => {
@@ -31,7 +31,7 @@ export const MenuPage: FunctionComponent = () => {
   const loading = useSelector((state: IState) => state.menu.loading);
 
   useEffect(() => {
-    dispatch(fetchMenu() as unknown as UnknownAction);
+    dispatch(fetchMenu());
   }, [dispatch]);
 
   return (
@@ -60,12 +60,14 @@ const MenuBody: FunctionComponent = () => {
 };
 
 const MenuSectionsTabs: FunctionComponent = () => {
+  const dispatch = useDispatch();
   const { menu } = useSelector((state: IState) => state.menu);
   const [activeSection, setActiveSection] = useState<string>(
     menu!.sections[0].id.toString()
   );
 
   const handleTabClick = (sectionId: string): void => {
+    dispatch(syncOpenSections([sectionId]));
     setActiveSection(sectionId);
   };
 
@@ -98,11 +100,19 @@ const MenuSectionsTabs: FunctionComponent = () => {
 };
 
 const MenuSectionAccordion: FunctionComponent = () => {
-  const { menu } = useSelector((state: IState) => state.menu);
-  const allSections = menu?.sections.map((section) => section.id.toString());
+  const { menu, openSections } = useSelector((state: IState) => state.menu);
+  const dispatch = useDispatch();
+
+  const handleOpenChange = (openSections: string[]): void => {
+    dispatch(syncOpenSections(openSections));
+  };
 
   return (
-    <Accordion type="multiple" defaultValue={allSections}>
+    <Accordion
+      type="multiple"
+      value={openSections}
+      onValueChange={handleOpenChange}
+    >
       {menu?.sections.map((section) => (
         <AccordionItem key={section.id} value={section.id.toString()}>
           <AccordionTrigger className="text-xl px-[16px]">
@@ -177,7 +187,31 @@ const SectionItem: FunctionComponent<SectionItemProps> = ({ item }) => {
 };
 
 const Loader: FunctionComponent = () => {
-  return <p>Carregando...</p>;
+  return (
+    <div className="w-[1024px]">
+      <Skeleton className="my-3 h-10 w-full" />
+      <div className="menu-content bg-[#F8F9FA] flex gap-8 px-[40px] py-[32px]">
+        <div className="w-[600px] bg-white shadow p-4">
+          <Skeleton className="h-20 w-full mb-4" />
+          <div className="space-y-4">
+            {[...Array(3)].map((_, index) => (
+              <div key={index}>
+                <Skeleton className="h-10 w-full" />
+                <div className="space-y-2 mt-2">
+                  {[...Array(2)].map((_, idx) => (
+                    <Skeleton key={idx} className="h-24 w-full" />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="w-[300px]">
+          <Skeleton className="h-96 w-full" />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 const NoData: FunctionComponent = () => {
