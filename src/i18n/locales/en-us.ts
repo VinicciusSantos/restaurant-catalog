@@ -37,5 +37,9 @@ export const enUsTranslations: AppTranslations = {
       description: "Language changed to english with success",
     },
   },
-  noData: "Venue data not found", 
+  noData: "Venue data not found",
+  searchbar: {
+    search_placeholder: "Search menu items",
+    no_items_found: "No items found searching for ",
+  }
 };

@@ -39,4 +39,8 @@ export const ptBrTranslations: AppTranslations = {
     },
   },
   noData: "Dados do local não encontrados", 
+  searchbar: {
+    search_placeholder: "Buscar por itens no menu",
+    no_items_found: "Nenhum item encontrado buscando por ",
+  }
 };

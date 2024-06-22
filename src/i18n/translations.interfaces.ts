@@ -4,6 +4,7 @@ export interface AppTranslations {
   contactUs: ContactUsPageTranslations;
   basket: BasketTranslations;
   languageToggle: LanguageToggleTranslations;
+  searchbar: SearcbBarTranslations;
   noData: string;
 }
 
@@ -46,4 +47,9 @@ export interface LanguageToggleTranslations {
     title: string;
     description: string;
   };
+}
+
+export interface SearcbBarTranslations {
+  search_placeholder: string;
+  no_items_found: string;
 }

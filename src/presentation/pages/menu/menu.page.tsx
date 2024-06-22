@@ -1,6 +1,6 @@
 import "./menu.styles.css";
 
-import { Banner, Basket } from "@presentation/components";
+import { Banner, Basket, ItemSearchbar } from "@presentation/components";
 import {
   Accordion,
   AccordionContent,
@@ -12,7 +12,6 @@ import {
   Dialog,
   DialogContent,
   DialogTrigger,
-  Input,
   Skeleton,
 } from "@presentation/ui";
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
@@ -24,6 +23,7 @@ import { IState } from "../../../store";
 import { resetDraftBasket } from "../../../store/basket";
 import { fetchMenu, syncOpenSections } from "../../../store/menu";
 import { ItemStratification } from "./modals/item-stratification.modal";
+import { cn } from "@presentation/utils/shadcn";
 
 export const MenuPage: FunctionComponent = () => {
   const dispatch = useDispatch();
@@ -47,7 +47,7 @@ export const MenuPage: FunctionComponent = () => {
 const MenuBody: FunctionComponent = () => {
   return (
     <>
-      <Input className="my-3" type="text" placeholder="Search" />
+      <ItemSearchbar />
       <div className="menu-content bg-[#F8F9FA] flex gap-8 px-[40px] py-[32px]">
         <div className="w-[600px] bg-white shadow">
           <MenuSectionsTabs />
@@ -131,11 +131,11 @@ const MenuSectionAccordion: FunctionComponent = () => {
   );
 };
 
-interface SectionItemProps {
+interface SectionItemProps extends React.HTMLAttributes<HTMLDivElement> {
   item: Item;
 }
 
-const SectionItem: FunctionComponent<SectionItemProps> = ({ item }) => {
+export const SectionItem: FunctionComponent<SectionItemProps> = ({ item, className }) => {
   const { venue } = useSelector((state: IState) => state.venue);
   const { basket } = useSelector((state: IState) => state.basket);
   const dispatch = useDispatch();
@@ -149,7 +149,7 @@ const SectionItem: FunctionComponent<SectionItemProps> = ({ item }) => {
   return (
     <Dialog onOpenChange={handleOpenChange}>
       <DialogTrigger>
-        <div className="flex items-center justify-between hover:bg-gray-50 px-[16px] py-3 cursor-pointer">
+        <div className={cn("flex items-center justify-between hover:bg-gray-50 px-[16px] py-3 cursor-pointer", className )}>
           <div className="flex flex-col mr-4 gap-1 text-left">
             <header className="flex items-center gap-2">
               {count && (
